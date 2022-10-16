@@ -6,6 +6,11 @@ pipeline {
         }
     }
     stages {
+         stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '0eba9e7131f1aed0f57234fb10e85f91016e60aa', url: 'https://github.com/magzupao/simple-java-maven-app.git']]])
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
